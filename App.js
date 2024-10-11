@@ -14,4 +14,4 @@ const Parent = () => (<div>
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
-root.render(<Parent/>)
+root.render(<Parent/>) // Can be called as a regular function
