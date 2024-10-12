@@ -1,5 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom/client"
+const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"
+
+const LOGO_URL = "https://img.freepik.com/premium-vector/food-ordering-app-logo-with-points-fork-shapes-center_666184-195.jpg"
 
 const resList = [
     {
@@ -1877,66 +1878,4 @@ const resList = [
     }
     ]
 
-const Header = () => {
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src="https://img.freepik.com/premium-vector/food-ordering-app-logo-with-points-fork-shapes-center_666184-195.jpg"/>
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-
-const RestoCard = ({resName, cuisine, rating, imgURL}) => {
-    return (
-        <div className="resto-card">
-            <img src={imgURL} className="res-img"/>
-            <div className="resto-content">
-                <h4>{resName}</h4>
-                <span>{cuisine}</span>
-                <p>{rating} stars</p>
-            </div>
-        </div>
-    )
-}
-
-const Body = () => {
-    return (
-        <div className="body">
-            <div className="search">
-                Search
-            </div>
-            <div className="resto-container">
-                {resList.map(restaurant => <RestoCard imgURL={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ restaurant.info.cloudinaryImageId} resName={restaurant.info.name} cuisine={restaurant.info.cuisines.join(", ")} rating={restaurant.info.avgRating}/>)}
-            </div>
-        </div>
-    )
-}
-
-const Footer = () => {
-    return (
-        <div className="footer">
-        </div>
-    )
-}
-
-const AppLayout = () => {
-    return (
-        <div className="app">
-            <Header/>
-            <Body/>
-            <Footer/>
-        </div>
-    )
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"))
-
-root.render(<AppLayout/>)
+export {CDN_URL, LOGO_URL, resList}
