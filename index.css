@@ -26,8 +26,14 @@
     margin: 10px;
 }
 
-.search{
-    padding: 20px;
+.filter{
+    padding-left: 20px;
+    margin: 20px;
+    margin-bottom: 0;
+}
+
+.filter > .filter-btn{
+    padding: 5px;
 }
 
 .resto-container{

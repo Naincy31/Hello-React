@@ -1,4 +1,4 @@
-const Header = (logo) => {
+const Header = ({logo}) => {
     return (
         <div className="header">
             <div className="logo-container">
