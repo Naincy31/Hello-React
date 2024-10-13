@@ -14,26 +14,49 @@
     width: 100px;
 }
 
+.nav-items{
+    display: flex;
+}
+
+.nav-items > .login{
+    padding: 6px 15px;
+    cursor: pointer;
+    margin: auto;
+}
+
 .nav-items > ul{
     display: flex;
-    margin: 15px 20px;
+    margin: auto;
     list-style-type: none;
 }
 
 .nav-items > ul > li{
     font-size: 18px;
     padding: 10px;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.filter{
-    padding-left: 20px;
-    margin: 20px;
-    margin-bottom: 0;
+.filter-search{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin-left: 20px;
 }
 
-.filter > .filter-btn{
+.filter-search > .filter-btn{
     padding: 5px;
+    cursor: pointer;
+}
+
+.search > .search-input{
+    padding: 5px;
+    width: 300px;
+}
+
+.search > button{
+    padding: 5px;
+    margin-left: 10px;
 }
 
 .resto-container, .shimmer-container{
