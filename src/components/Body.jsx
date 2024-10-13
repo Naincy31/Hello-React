@@ -1,11 +1,25 @@
-import { useState } from "react";
-import { resList as initialResList} from "../utils/constants";
+import { useState, useEffect } from "react";
 import RestoCard from "./RestoCard";
+import Shimmer from "./Shimmer";
 
 const Body = ({cdn}) => {
 
-    const [resList, setResList] = useState(initialResList)
+    const [resList, setResList] = useState([])
     const [btnText, setBtnText] = useState("Top Rated Restaurants")
+
+    useEffect(() => {
+        fecthData()
+    }, [])
+
+    const fecthData = async () => {
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+        const json = await data.json()
+        setResList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    }
+
+    if(resList.length === 0){
+        return <Shimmer/>
+    }
 
     const handleClick = () => {
         if (btnText === "Top Rated Restaurants") {
