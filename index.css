@@ -1,6 +1,12 @@
 *{
     margin: 0;
     padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .header{
@@ -21,7 +27,7 @@
 .nav-items > .login{
     padding: 6px 15px;
     cursor: pointer;
-    margin: auto;
+    margin: auto 20px;
 }
 
 .nav-items > ul{
@@ -33,25 +39,28 @@
 .nav-items > ul > li{
     font-size: 18px;
     padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 .filter-search{
     display: flex;
     gap: 20px;
     padding: 20px;
-    margin-left: 20px;
+    margin: 20px 0 0 20px;
 }
 
 .filter-search > .filter-btn{
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+    background-color: white;
 }
 
 .search > .search-input{
-    padding: 5px;
+    padding: 10px;
     width: 300px;
+    border-radius: 10px;
+    border: none;
 }
 
 .search > button{
@@ -60,6 +69,7 @@
 }
 
 .resto-container, .shimmer-container{
+    margin: 10px 0 50px 0;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -77,16 +87,57 @@
 }
 
 .resto-card:hover{
-    border: 1px solid grey;
+    transform: scale(0.95);
+    transition: all ease-in-out 0.2s;
     cursor: pointer;
 }
 
 .res-img {
     width: 250px;
     height: 200px;
+    border-radius: 20px;
+}
+
+.menu{
+    margin: auto;
+    padding: 10px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu > .resto-item{
+    margin: 50px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.resto-item > .item-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-info > .price{
+    font-weight: 500;
+}
+
+.item-info > .ratings > .rating{
+    color: rgb(17, 102, 73);
+    font-weight: bolder;
+}
+
+.item-img  img{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
 }
 
 .footer{
-    height: 100px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
     background-color: grey;
 }

@@ -1,4 +1,5 @@
-const RestoCard = ({resName, cuisine, rating, imgURL, costForTwo}) => {
+const RestoCard = ({resName, cuisine, rating, imgURL, costForTwo, resLink}) => {
+    
     return (
         <div className="resto-card">
             <img src={imgURL} className="res-img"/>

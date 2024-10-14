@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import RestoCard from "./RestoCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = ({cdn}) => {
 
@@ -16,7 +17,7 @@ const Body = ({cdn}) => {
     const fecthData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
         const json = await data.json()
-        const restaurantsData = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        const restaurantsData = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
         setResList(restaurantsData)
         setOriginalResList(restaurantsData)
     }
@@ -53,7 +54,17 @@ const Body = ({cdn}) => {
             </div>
             
             <div className="resto-container">
-                {resList.map(restaurant => <RestoCard key={restaurant.info.id} costForTwo={restaurant.info.costForTwo} imgURL={cdn + restaurant.info.cloudinaryImageId} resName={restaurant.info.name} cuisine={restaurant.info.cuisines.join(", ")} rating={restaurant.info.avgRating}/>)}
+                {resList.map(restaurant => (
+                    <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}>
+                        <RestoCard 
+                        resLink={restaurant.cta.link} 
+                        costForTwo={restaurant.info.costForTwo} 
+                        imgURL={cdn + restaurant.info.cloudinaryImageId} 
+                        resName={restaurant.info.name} 
+                        cuisine={restaurant.info.cuisines.join(", ")} 
+                        rating={restaurant.info.avgRating}/>
+                    </Link>
+                ))}
             </div>
         </div>
     )
