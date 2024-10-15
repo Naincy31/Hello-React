@@ -38,11 +38,13 @@ const RestoMenu = () => {
                             {item.card.info.ratings.aggregatedRating.rating && (<span className="rating">★ {item.card.info.ratings.aggregatedRating.rating}</span>)}
                             <span className="rating-no">{item.card.info.ratings.aggregatedRating.ratingCountV2 && " (" + item.card.info.ratings.aggregatedRating.ratingCountV2 + ")"}</span>
                         </div>
-                        <p className="description">{item.card.info.description.split("|")[1]}</p>
+                        <p className="description">{item.card.info.description}</p>
                     </div>
-                    <div className="item-img">
-                        <img src={CDN_URL + item.card.info.imageId} alt="" />
-                    </div>
+                    {item.card.info.imageId && 
+                        <div className="item-img">
+                            <img src={CDN_URL + item.card.info.imageId} alt="" />
+                        </div>
+                    }
                 </div>
             ))}
         </div>
