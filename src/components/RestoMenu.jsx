@@ -1,29 +1,17 @@
-import { useState, useEffect } from 'react'
 import Shimmer from './Shimmer'
 import { CDN_URL } from '../utils/constants'
 import { useParams } from 'react-router-dom'
+import useRestoMenu from '../utils/hooks/useRestoMenu'
 
 const RestoMenu = () => {
-
-    const [restoData, setRestoData] = useState(null)
-
     const {resId} = useParams()
 
-    useEffect(() => {
-        fetchMenu()
-    }, [])
+    const resInfo = useRestoMenu(resId)
+    
+    if (resInfo === null) return <Shimmer/>
 
-    const fetchMenu = async () => {
-        const response = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.0759837&lng=72.8776559&restaurantId=${resId}`)
-        const json = await response.json()
-        console.log(json);
-        setRestoData(json.data)
-    }
-
-    if (restoData === null) return <Shimmer/>
-
-    const {name, cuisines, costForTwoMessage} = restoData?.cards[2]?.card?.card?.info
-    const {itemCards} = restoData?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+    const {name, cuisines, costForTwoMessage} = resInfo?.cards[2]?.card?.card?.info
+    const {itemCards} = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
     
     return (
         <div className="menu">

@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header";
-import Body from "./components/Body";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { CDN_URL, LOGO_URL } from "./utils/constants";
 import RestoMenu from "./components/RestoMenu";
+import RestoList from "./components/RestoList";
 
 const AppLayout = () => {
     return (
@@ -26,7 +26,7 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Body cdn = {CDN_URL}/>
+                element: <RestoList cdn = {CDN_URL}/>
             },
             {
                 path: "/about", 

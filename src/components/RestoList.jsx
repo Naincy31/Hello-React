@@ -2,25 +2,23 @@ import { useState, useEffect } from "react";
 import RestoCard from "./RestoCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useRestoList from "../utils/hooks/useRestoList";
+import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 
-const Body = ({cdn}) => {
+const RestoList = ({cdn}) => {
 
     const [resList, setResList] = useState([])
-    const [originalResList, setOriginalResList] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [btnText, setBtnText] = useState("Top Rated Restaurants")
+    const onlineStatus = useOnlineStatus()
+    
+    const originalResList = useRestoList()
 
     useEffect(() => {
-        fecthData()
-    }, [])
-
-    const fecthData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
-        const json = await data.json()
-        const restaurantsData = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-        setResList(restaurantsData)
-        setOriginalResList(restaurantsData)
-    }
+        if(originalResList && originalResList.length > 0){
+            setResList(originalResList)
+        }
+    }, [originalResList])
 
     const handleClick = () => {
         if (btnText === "Top Rated Restaurants") {
@@ -41,6 +39,8 @@ const Body = ({cdn}) => {
             searchedList.length === 0 ? setResList(originalResList) : setResList(searchedList)
         }
     }
+
+    if(!onlineStatus) return <h4>Looks like you're offline. Please check your internet connection</h4>
 
     return (resList.length === 0) ? <Shimmer/> :
     (
@@ -70,4 +70,4 @@ const Body = ({cdn}) => {
     )
 }
 
-export default Body;
+export default RestoList;
