@@ -11,7 +11,7 @@ import RestoList from "./components/RestoList";
 
 const AppLayout = () => {
     return (
-        <div className="app">
+        <div className="font-noto">
             <Header logo = {LOGO_URL}/>
             <Outlet/> 
             <Footer/>

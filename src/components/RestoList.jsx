@@ -44,16 +44,16 @@ const RestoList = ({cdn}) => {
 
     return (resList.length === 0) ? <Shimmer/> :
     (
-        <div className="body">
-            <div className="filter-search">
-                <button onClick = {handleClick} className="filter-btn">{btnText}</button>
-                <div className="search">
-                    <input type="search" className="search-input" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Search restaurants..."/>
-                    <button onClick={handleSearch}>Search</button>
+        <div>
+            <div className="flex p-4 mx-7">
+                <button onClick = {handleClick} className="border px-5 py-1 rounded-3xl font-extrabold text-sm">{btnText}</button>
+                <div className="px-5 py-1">
+                    <input type="search" className="w-80 mr-2 px-5 py-1 border border-solid rounded-md focus:outline-none" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Search restaurants..."/>
+                    <button className="border px-5 py-1 rounded-lg" onClick={handleSearch}>Search</button>
                 </div>
             </div>
             
-            <div className="resto-container">
+            <div className="flex flex-wrap mt-2 mb-12 p-5">
                 {resList.map(restaurant => (
                     <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}>
                         <RestoCard 
