@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestoCard, { withOfferLabel, RestoCardWrapper } from "./RestoCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestoList from "../utils/hooks/useRestoList";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
+import UserContext from "../utils/context/UserContext";
 
 const RestoList = () => {
 
@@ -46,6 +47,8 @@ const RestoList = () => {
 
     if(!onlineStatus) return <h4>Looks like you're offline. Please check your internet connection</h4>
 
+    const { setUserName, loggedInUser } = useContext(UserContext)
+
     return (restoList.length === 0) ? <Shimmer/> :
     (
         <div>
@@ -54,6 +57,10 @@ const RestoList = () => {
                 <div className="px-5 py-1">
                     <input type="search" className="w-80 mr-2 px-5 py-1 border border-solid rounded-md focus:outline-none" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Search restaurants..."/>
                     <button className="border px-5 py-1 rounded-lg" onClick={handleSearch}>Search</button>
+                </div>
+                <div className="px-5 py-1">
+                    <label>UserName</label>
+                    <input className="w-80 mr-2 px-5 py-1 border border-solid rounded-md focus:outline-none" value={loggedInUser} onChange={(e) => setUserName(e.target.value)}/>
                 </div>
             </div>
             
