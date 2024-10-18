@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-
 const useRestoList = () => {
     const [resList, setResList] = useState([])
 
@@ -18,4 +17,4 @@ const useRestoList = () => {
     return resList;
 }
 
-export default useRestoList;
+export default useRestoList; 

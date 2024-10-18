@@ -1,48 +1,52 @@
 import { useState, useEffect } from "react";
-import RestoCard from "./RestoCard";
+import RestoCard, { withOfferLabel, RestoCardWrapper } from "./RestoCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestoList from "../utils/hooks/useRestoList";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 
-const RestoList = ({cdn}) => {
+const RestoList = () => {
 
-    const [resList, setResList] = useState([])
+    const [restoList, setRestoList] = useState([])
     const [inputValue, setInputValue] = useState("")
     const [btnText, setBtnText] = useState("Top Rated Restaurants")
     const onlineStatus = useOnlineStatus()
     
     const originalResList = useRestoList()
 
+    const RestoCardOffer = withOfferLabel(RestoCard)
+
     useEffect(() => {
         if(originalResList && originalResList.length > 0){
-            setResList(originalResList)
+            setRestoList(originalResList)
         }
     }, [originalResList])
+
+    console.log("ResList rendered:", restoList);
 
     const handleClick = () => {
         if (btnText === "Top Rated Restaurants") {
             const filteredResList = originalResList.filter((resto) => resto.info.avgRating > "4.3")
-            setResList(filteredResList)
+            setRestoList(filteredResList)
             setBtnText("Show All Restaurants")
         } else {
-            setResList(originalResList)
+            setRestoList(originalResList)
             setBtnText("Top Rated Restaurants")
         }
     }
 
     const handleSearch = () => {
         if(inputValue.trim() === ""){
-            setResList(originalResList)
+            setRestoList(originalResList)
         } else {
-            const searchedList = resList.filter((resto) => resto.info.name.toLowerCase().includes(inputValue.toLowerCase()))
-            searchedList.length === 0 ? setResList(originalResList) : setResList(searchedList)
+            const searchedList = restoList.filter((resto) => resto.info.name.toLowerCase().includes(inputValue.toLowerCase()))
+            searchedList.length === 0 ? setRestoList(originalResList) : setRestoList(searchedList)
         }
     }
 
     if(!onlineStatus) return <h4>Looks like you're offline. Please check your internet connection</h4>
 
-    return (resList.length === 0) ? <Shimmer/> :
+    return (restoList.length === 0) ? <Shimmer/> :
     (
         <div>
             <div className="flex p-4 mx-7">
@@ -54,15 +58,21 @@ const RestoList = ({cdn}) => {
             </div>
             
             <div className="flex flex-wrap mt-2 mb-12 p-5">
-                {resList.map(restaurant => (
+                {restoList.map(restaurant => (
                     <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}>
-                        <RestoCard 
-                        resLink={restaurant.cta.link} 
-                        costForTwo={restaurant.info.costForTwo} 
-                        imgURL={cdn + restaurant.info.cloudinaryImageId} 
-                        resName={restaurant.info.name} 
-                        cuisine={restaurant.info.cuisines.join(", ")} 
-                        rating={restaurant.info.avgRating}/>
+                        <RestoCardWrapper>
+                            {
+                            restaurant.info.aggregatedDiscountInfoV3?.header ? (
+                                <RestoCardOffer 
+                                    resInfo = {restaurant.info}
+                                /> 
+                            )
+                            : (
+                                <RestoCard 
+                                    resInfo = {restaurant.info}
+                                />
+                            )}
+                        </RestoCardWrapper>
                     </Link>
                 ))}
             </div>

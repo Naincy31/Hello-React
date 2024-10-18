@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import { CDN_URL, LOGO_URL } from "./utils/constants";
+import { LOGO_URL } from "./utils/constants";
 import RestoMenu from "./components/RestoMenu";
 import RestoList from "./components/RestoList";
 
@@ -26,7 +26,7 @@ const appRouter = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <RestoList cdn = {CDN_URL}/>
+                element: <RestoList/>
             },
             {
                 path: "/about", 
