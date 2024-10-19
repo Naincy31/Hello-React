@@ -1,11 +1,19 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/store/cartSlice";
 import { CDN_URL } from "../utils/constants";
 
 const ItemList = ({items}) => {
+
+    const dispatch = useDispatch()
+
+    const handleClick = (item) => {
+        dispatch(addItem(item))
+    }
     
     return (
         <div className="mx-3">
-            {items?.map((item) => (
-                <div key={item.card.info.id} className="w-full flex justify-between items-center border-b-2 py-5">
+            {items?.map((item, index) => (
+                <div key={item.card.info.id} className={`w-full flex justify-between items-center py-5 ${index !== items.length - 1 ? 'border-b-[1.5px]': ''}`}>
                     <div>
                         <h1 className="font-extrabold text-gray-700">{item.card.info.name}</h1>
                         <p className="font-extrabold">₹{item.card.info.defaultPrice/100 || item.card.info.price/100}</p>
@@ -15,10 +23,16 @@ const ItemList = ({items}) => {
                         </div>
                         <p className="line-clamp-2 w-96 text-sm font-medium">{item.card.info.description}</p>
                     </div>
-                    <div className="flex flex-col">
-                        <img src={CDN_URL + item.card.info.imageId} className="h-52 w-52"/>
-                        <button className="border-2 rounded-lg px-10 py-2 text-green-600 font-extrabold bg-white">ADD</button>
-                    </div>
+                    {item.card.info.imageId ? 
+                        <div className="flex flex-col items-center justify-center">
+                            <img src={CDN_URL + item.card.info.imageId} className="h-44 w-48 rounded-lg"/>
+                            <button className="text-green-600 font-extrabold bg-white border px-10 py-1 rounded-lg shadow-md -mt-4" onClick={() => handleClick(item)}>ADD</button>
+                        </div> 
+                        :
+                        <div className="h-44 w-48 flex items-center justify-center">
+                            <button className="text-green-600 font-extrabold bg-white border px-10 py-1 rounded-lg shadow-md -mt-4" onClick={() => handleClick(item)}>ADD</button>
+                        </div> 
+                    }
                 </div>
             ))}
         </div>

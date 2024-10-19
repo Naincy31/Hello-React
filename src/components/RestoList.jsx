@@ -23,8 +23,6 @@ const RestoList = () => {
         }
     }, [originalResList])
 
-    console.log("ResList rendered:", restoList);
-
     const handleClick = () => {
         if (btnText === "Top Rated Restaurants") {
             const filteredResList = originalResList.filter((resto) => resto.info.avgRating > "4.3")
@@ -51,7 +49,7 @@ const RestoList = () => {
 
     return (restoList.length === 0) ? <Shimmer/> :
     (
-        <div>
+        <div className="bg-gray-50">
             <div className="flex p-4 mx-7">
                 <button onClick = {handleClick} className="border px-5 py-1 rounded-3xl font-extrabold text-sm">{btnText}</button>
                 <div className="px-5 py-1">

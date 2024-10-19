@@ -9,6 +9,9 @@ import { LOGO_URL } from "./utils/constants";
 import RestoMenu from "./components/RestoMenu";
 import RestoList from "./components/RestoList";
 import UserContext from "../src/utils/context/UserContext";
+import { Provider } from "react-redux";
+import appStore from "../src/utils/store/appStore";
+import Cart from "./components/Cart";
 
 const AppLayout = () => {
     const [userName, setUserName] = useState()
@@ -21,13 +24,16 @@ const AppLayout = () => {
     }, [])
 
     return (
-        <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
-            <div className="font-noto">
-                <Header logo = {LOGO_URL}/>
-                <Outlet/> 
-                <Footer/>
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+                <div className="font-noto bg-gray-50 h-screen">
+                    <Header logo = {LOGO_URL}/>
+                    <Outlet/> 
+                    <Footer/>
+                </div>
+            </UserContext.Provider>
+        </Provider>
+        
     )
 }
 
@@ -43,6 +49,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/about", 
                 element: <About/>
+            },
+            {
+                path:"/cart",
+                element: <Cart/>
             },
             {
                 path: "/restaurants/:resId",
