@@ -2,16 +2,15 @@ import React, { useState, useEffect} from "react";
 import ReactDOM from "react-dom/client"
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import About from "./components/About";
 import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { LOGO_URL } from "./utils/constants";
 import RestoMenu from "./components/RestoMenu";
 import RestoList from "./components/RestoList";
-import UserContext from "../src/utils/context/UserContext";
 import { Provider } from "react-redux";
 import appStore from "../src/utils/store/appStore";
 import Cart from "./components/Cart";
+import Search from "./components/Search";
 
 const AppLayout = () => {
     const [userName, setUserName] = useState()
@@ -25,13 +24,11 @@ const AppLayout = () => {
 
     return (
         <Provider store={appStore}>
-            <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
-                <div className="font-noto bg-gray-50 h-screen">
-                    <Header logo = {LOGO_URL}/>
-                    <Outlet/> 
-                    <Footer/>
-                </div>
-            </UserContext.Provider>
+            <div className="font-noto bg-gray-50 h-screen">
+                <Header logo = {LOGO_URL}/>
+                <Outlet/> 
+                <Footer/>
+            </div>
         </Provider>
         
     )
@@ -47,8 +44,8 @@ const appRouter = createBrowserRouter([
                 element: <RestoList/>
             },
             {
-                path: "/about", 
-                element: <About/>
+                path:"/search",
+                element: <Search/>
             },
             {
                 path:"/cart",
