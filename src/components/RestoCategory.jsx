@@ -1,4 +1,4 @@
-import ItemList from "./ItemList"
+import RestoItemList from "./RestoItemList"
 import { useState } from 'react'
 
 const RestoCategory = ({data, showItems, setShowIndex, showIndex}) => {
@@ -14,7 +14,7 @@ const RestoCategory = ({data, showItems, setShowIndex, showIndex}) => {
                 <span className="font-extrabold">{data.title}{data.itemCards && ` (${data.itemCards.length})`}</span>
                 <span>{showItems ? "▼" : "▲"}</span>
             </div>
-            {showItems && <ItemList items={data.itemCards}/>}
+            {showItems && <RestoItemList items={data.itemCards}/>}
         </div>
     )
 }

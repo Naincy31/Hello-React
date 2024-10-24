@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import appStore from "../src/utils/store/appStore";
 import Cart from "./components/Cart";
 import Search from "./components/Search";
+import Login from "./components/Login";
 
 const AppLayout = () => {
     const [userName, setUserName] = useState()
@@ -50,6 +51,10 @@ const appRouter = createBrowserRouter([
             {
                 path:"/cart",
                 element: <Cart/>
+            },
+            {
+                path:"/login",
+                element: <Login/>
             },
             {
                 path: "/restaurants/:resId",

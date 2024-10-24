@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../utils/store/cartSlice";
 import { CDN_URL } from "../utils/constants";
 
-const ItemList = ({items}) => {
+const RestoItemList = ({items}) => {
 
     const dispatch = useDispatch()
 
@@ -39,5 +39,5 @@ const ItemList = ({items}) => {
     )
 }
 
-export default ItemList
+export default RestoItemList
 
