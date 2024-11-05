@@ -1,5 +1,4 @@
 import RestoItemList from "./RestoItemList"
-import { useState } from 'react'
 
 const RestoCategory = ({data, showItems, setShowIndex, showIndex}) => {
 
