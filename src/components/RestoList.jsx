@@ -4,30 +4,32 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useRestoList from "../utils/hooks/useRestoList";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
+import { useDispatch, useSelector } from "react-redux";
+import { filteredRestaurantsByRating, resetFilters, setRestaurants } from "../utils/store/restoSlice";
 
 const RestoList = () => {
 
-    const [restoList, setRestoList] = useState([])
+    const dispatch = useDispatch()
+    const restoList = useSelector((state) => state.restaurants.filterActive ? state.restaurants.filteredList : state.restaurants.list)
     const [btnText, setBtnText] = useState("Top Rated Restaurants")
     const onlineStatus = useOnlineStatus()
-    
-    const originalResList = useRestoList()
+
+    const originalResList = useRestoList() //Calls the hook to fetch the data
 
     const RestoCardOffer = withOfferLabel(RestoCard)
 
     useEffect(() => {
         if(originalResList && originalResList.length > 0){
-            setRestoList(originalResList)
+            dispatch(setRestaurants(originalResList))
         }
     }, [originalResList])
 
     const handleClick = () => {
         if (btnText === "Top Rated Restaurants") {
-            const filteredResList = originalResList.filter((resto) => resto.info.avgRating > "4.3")
-            setRestoList(filteredResList)
+            dispatch(filteredRestaurantsByRating())
             setBtnText("Show All Restaurants")
         } else {
-            setRestoList(originalResList)
+            dispatch(resetFilters())
             setBtnText("Top Rated Restaurants")
         }
     }
