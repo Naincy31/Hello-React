@@ -2,7 +2,7 @@ import { CDN_URL } from "../utils/constants"
 
 const RestoCard = ({resInfo}) => {
     const {name, cuisines, avgRating, cloudinaryImageId, costForTwo} = resInfo
-    
+   
     return (
         <div className="w-60 h-80 p-1 m-3">
             <img src={CDN_URL + cloudinaryImageId} className="w-60 h-44 rounded-2xl"/>
@@ -24,9 +24,10 @@ const RestoCard = ({resInfo}) => {
 //Higher Order Component
 
 export const withOfferLabel = (RestoCard) => {
+    //returns a new functional component wrapping RestoCard component
     return (props) => {
         const { resInfo: {aggregatedDiscountInfoV3 }} = props;
-
+        //modified JSX that includes both offer label and RestoCard content
         return (
             <div className="relative">
                 <div className="absolute top-36 left-4 p-2 text-white z-10">
