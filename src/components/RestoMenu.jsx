@@ -6,9 +6,7 @@ import RestoCategory from './RestoCategory'
 
 const RestoMenu = () => {
     const {resId} = useParams()
-
     const resInfo = useRestoMenu(resId)
-
     const [showIndex, setShowIndex] = useState(0)
     
     if (resInfo === null) return <Shimmer/>

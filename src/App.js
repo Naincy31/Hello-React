@@ -25,7 +25,7 @@ const AppLayout = () => {
 
     return (
         <Provider store={appStore}>
-            <div className="font-noto bg-gray-50 h-screen">
+            <div className="font-noto bg-gray-50 h-full">
                 <Header logo = {LOGO_URL}/>
                 <Outlet/> 
                 <Footer/>

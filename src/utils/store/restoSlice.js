@@ -9,11 +9,9 @@ const restoSlice = createSlice({
     },
     reducers: {
         setRestaurants: (state, action) => {
-            if(action.payload && action.payload.length > 0) {
                 state.list = action.payload;
                 state.filteredList = [];
                 state.filterActive = false
-            }
         },
         filteredRestaurantsByName: (state, action) => {
             state.filteredList = state.list.filter(resto => resto.info.name.toLowerCase().includes(action.payload.toLowerCase()))

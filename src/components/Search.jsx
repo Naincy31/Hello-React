@@ -31,7 +31,7 @@ const Search = () => {
     }, [inputValue])
 
     return (
-        <div className="w-[800] m-auto mt-10 pb-6 flex flex-col gap-11">
+        <div className="w-[800] m-auto mt-10 pb-6 flex flex-col gap-11 h-screen">
             <div className="text-gray-600">
                 <input type="search" className="w-[700] px-5 py-3 border border-solid rounded-md focus:outline-none" value={inputValue} onChange={handleSearch} placeholder="Search for restaurants and food..."/>
                 <i className="fa fa-search -ml-8 text-lg"></i>
@@ -39,7 +39,7 @@ const Search = () => {
             {filteredList.length > 0 ? 
                 <div className="w-[700]"> 
                     {filteredList.map((restaurant) => (
-                    <div key={restaurant.info.id} className="flex gap-2 mb-3 hover:bg-gray-100 p-2">
+                    <div key={restaurant.info.id} className="flex gap-2 mb-3 hover:bg-gray-100 p-2 res-info">
                         <img src={CDN_URL + restaurant.info.cloudinaryImageId} className="w-10 h-10 rounded-lg"/>
                         <h6 className="text-sm">{restaurant.info.name}</h6>
                     </div>
@@ -50,7 +50,7 @@ const Search = () => {
                     <h1 className="font-extrabold">Popular Cuisines</h1>
                     <div className="flex mt-4">
                         {cuisinesList.map(cuisine => (
-                            <img src={CDN_URL + cuisine.imageId} className="h-14 w-11"/>
+                            <img src={CDN_URL + cuisine.imageId} className="h-20 w-14"/>
                         ))}
                     </div>
                 </div>
